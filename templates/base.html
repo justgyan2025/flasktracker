@@ -32,9 +32,6 @@
     </script>
 </head>
 <body class="bg-gray-100">
-    {% if not session.logged_in %}
-        <script>window.location.href = "{{ url_for('login') }}";</script>
-    {% endif %}
     <!-- Navbar -->
     <nav class="bg-blue-600 text-white shadow-lg">
         <div class="max-w-6xl mx-auto px-4">
@@ -65,9 +62,8 @@
                            class="py-5 px-3 {% if active_page == 'nps' %}text-white bg-blue-700{% else %}hover:text-gray-200{% endif %}">
                             NPS
                         </a>
-                        {% if session.logged_in %}
-                            <a href="/logout" class="py-5 px-3 hover:text-gray-200">Logout</a>
-                        {% endif %}
+                        <a id="login-link" href="/login" class="py-5 px-3 hover:text-gray-200">Login</a>
+                        <a id="logout-link" href="#" class="py-5 px-3 hover:text-gray-200 hidden" onclick="logout()">Logout</a>
                     </div>
                 </div>
             </div>
@@ -88,5 +84,26 @@
     <div class="container mx-auto px-4 py-8">
         {% block content %}{% endblock %}
     </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('logged_in');
+            window.location.href = '/login';
+        }
+
+        window.addEventListener('load', function() {
+            const loggedIn = localStorage.getItem('logged_in');
+            const loginLink = document.getElementById('login-link');
+            const logoutLink = document.getElementById('logout-link');
+
+            if (loggedIn) {
+                loginLink.classList.add('hidden');
+                logoutLink.classList.remove('hidden');
+            } else {
+                loginLink.classList.remove('hidden');
+                logoutLink.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
