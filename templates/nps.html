@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="space-y-6">
+    <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold">NPS Portfolio</h1>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            Add NPS Investment
+        </button>
+    </div>
+
+    <!-- NPS Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold mb-2">Total Investment</h2>
+            <p class="text-2xl font-bold text-blue-600">₹0.00</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold mb-2">Current Value</h2>
+            <p class="text-2xl font-bold text-green-600">₹0.00</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold mb-2">Returns</h2>
+            <p class="text-2xl font-bold text-purple-600">0%</p>
+        </div>
+    </div>
+
+    <!-- NPS Asset Allocation -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4">Asset Allocation</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="space-y-2">
+                <p class="text-gray-600">Equity (E)</p>
+                <div class="bg-gray-200 rounded-full h-2">
+                    <div class="bg-blue-600 h-2 rounded-full" style="width: 0%"></div>
+                </div>
+                <p class="text-sm">0%</p>
+            </div>
+            <div class="space-y-2">
+                <p class="text-gray-600">Corporate Bonds (C)</p>
+                <div class="bg-gray-200 rounded-full h-2">
+                    <div class="bg-green-600 h-2 rounded-full" style="width: 0%"></div>
+                </div>
+                <p class="text-sm">0%</p>
+            </div>
+            <div class="space-y-2">
+                <p class="text-gray-600">Government Securities (G)</p>
+                <div class="bg-gray-200 rounded-full h-2">
+                    <div class="bg-purple-600 h-2 rounded-full" style="width: 0%"></div>
+                </div>
+                <p class="text-sm">0%</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction History -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <h2 class="text-xl font-semibold p-6 border-b">Transaction History</h2>
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NAV</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Units</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                <!-- Sample row (will be populated from database) -->
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">2024-03-20</td>
+                    <td class="px-6 py-4 whitespace-nowrap">Contribution</td>
+                    <td class="px-6 py-4 whitespace-nowrap">₹5000.00</td>
+                    <td class="px-6 py-4 whitespace-nowrap">₹50.00</td>
+                    <td class="px-6 py-4 whitespace-nowrap">100</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %} 

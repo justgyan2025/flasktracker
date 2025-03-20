@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="space-y-6">
+    <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Mutual Funds Portfolio</h1>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            Add Mutual Fund
+        </button>
+    </div>
+
+    <!-- Mutual Funds List -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fund Name</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Units</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NAV</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Investment Amount</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Value</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Returns (%)</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                <!-- Sample row (will be populated from database) -->
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">Sample Mutual Fund</td>
+                    <td class="px-6 py-4 whitespace-nowrap">100</td>
+                    <td class="px-6 py-4 whitespace-nowrap">₹50.00</td>
+                    <td class="px-6 py-4 whitespace-nowrap">₹5000.00</td>
+                    <td class="px-6 py-4 whitespace-nowrap">₹5500.00</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-green-600">+10%</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <button class="text-blue-600 hover:text-blue-800 mr-2">Edit</button>
+                        <button class="text-red-600 hover:text-red-800">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %} 
