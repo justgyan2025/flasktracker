@@ -32,6 +32,9 @@
     </script>
 </head>
 <body class="bg-gray-100">
+    {% if not session.logged_in %}
+        <script>window.location.href = "{{ url_for('login') }}";</script>
+    {% endif %}
     <!-- Navbar -->
     <nav class="bg-blue-600 text-white shadow-lg">
         <div class="max-w-6xl mx-auto px-4">
@@ -46,11 +49,11 @@
 
                     <!-- Primary Nav -->
                     <div class="hidden md:flex items-center space-x-1">
-                        <a href="/dashboard" 
+                        <a href="/" 
                            class="py-5 px-3 {% if active_page == 'dashboard' %}text-white bg-blue-700{% else %}hover:text-gray-200{% endif %}">
                             Dashboard
                         </a>
-                        <a href="/stocks" 
+                        <a href="/stocks"
                            class="py-5 px-3 {% if active_page == 'stocks' %}text-white bg-blue-700{% else %}hover:text-gray-200{% endif %}">
                             Stocks
                         </a>
@@ -58,10 +61,13 @@
                            class="py-5 px-3 {% if active_page == 'mutual_funds' %}text-white bg-blue-700{% else %}hover:text-gray-200{% endif %}">
                             Mutual Funds
                         </a>
-                        <a href="/nps" 
+                        <a href="/nps"
                            class="py-5 px-3 {% if active_page == 'nps' %}text-white bg-blue-700{% else %}hover:text-gray-200{% endif %}">
                             NPS
                         </a>
+                        {% if session.logged_in %}
+                            <a href="/logout" class="py-5 px-3 hover:text-gray-200">Logout</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -83,4 +89,4 @@
         {% block content %}{% endblock %}
     </div>
 </body>
-</html> 
+</html>
