@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+from flask import Flask, render_template, jsonify, request
 from dotenv import load_dotenv
 import os
 import yfinance as yf
@@ -8,9 +8,6 @@ load_dotenv(dotenv_path=".env")
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
-
-USERNAME = os.environ.get('USERNAME')
-PASSWORD = os.environ.get('PASSWORD')
 
 # Firebase configuration for client-side
 app.config.update({
@@ -22,38 +19,13 @@ app.config.update({
     'FIREBASE_APP_ID': os.getenv('FIREBASE_APP_ID')
 })
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    session.clear()
-    USERNAME = os.environ.get('USERNAME')
-    PASSWORD = os.environ.get('PASSWORD')
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        print(f"Username from form: {username}")
-        print(f"Password from form: {password}")
-        print(f"Username from .env: {USERNAME}")
-        print(f"Password from .env: {PASSWORD}")
-        print(f"Username from os.environ after load_dotenv: {os.environ.get('USERNAME')}")
-        print(f"Password from os.environ after load_dotenv: {os.environ.get('PASSWORD')}")
-        if username == USERNAME and password == PASSWORD:
-            session['logged_in'] = True
-            return redirect(url_for('dashboard'))
-        else:
-            return render_template('login.html', error='Invalid credentials', config=app.config)
-    return render_template('login.html', config=app.config)
-
-def login_required(f):
-    def decorated_function(*args, **kwargs):
-        if session.get('logged_in'):
-            return f(*args, **kwargs)
-        else:
-            return redirect(url_for('login'))
-    return decorated_function
-
 @app.route('/')
 def dashboard():
     return render_template('dashboard.html', active_page='dashboard', config=app.config)
+
+@app.route('/login')
+def login():
+    return render_template('login.html', config=app.config)
 
 @app.route('/stocks')
 def stocks():
@@ -66,12 +38,6 @@ def mutual_funds():
 @app.route('/nps')
 def nps():
     return render_template('nps.html', active_page='nps', config=app.config)
-
-@app.route('/logout')
-@login_required
-def logout():
-    session['logged_in'] = False
-    return redirect(url_for('login'))
 
 @app.route('/get_stock_info')
 def get_stock_info():
